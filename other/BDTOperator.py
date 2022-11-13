@@ -1,11 +1,13 @@
 
 import pendulum
 
-from datetime import datetime
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.datetime import BranchDateTimeOperator
 
+'''
+根据执行日期和/或时间是否落入两个目标参数给定的范围内，使用 BranchDateTimeOperator 分支到两个执行路径之一。
+'''
 with DAG(
     'BDTOperator',
     description='认识 BranchDateTimeOperator',
