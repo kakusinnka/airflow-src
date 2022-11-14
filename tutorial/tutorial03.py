@@ -2,6 +2,7 @@
 import pendulum
 
 from airflow.decorators import dag, task
+from airflow.operators.bash import BashOperator
 
 
 @dag(
@@ -10,7 +11,7 @@ from airflow.decorators import dag, task
     catchup=False,
     tags=['hzh-test'],
 )
-def tutorial_taskflow_api_etl_002():
+def test_003():
 
     @task()
     def extract():
@@ -21,16 +22,17 @@ def tutorial_taskflow_api_etl_002():
         print("transform01")
         return "transform01"
 
-    @task()
-    def transform02(param: str):
-        print("param" + "02")
+    transform02 = BashOperator(
+        task_id='transform02',
+        bash_command='echo 1',
+    )
 
     @task()
     def load():
         print("load")
 
     mystr = transform01()
-    extract() >> mystr >> transform02(mystr) >> load()
+    extract() >> mystr >> transform02 >> load()
 
 
-tutorial_etl_dag002 = tutorial_taskflow_api_etl_002()
+test_dag003 = test_003()

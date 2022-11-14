@@ -3,11 +3,12 @@ import pendulum
 
 from airflow.decorators import dag, task
 
+
 @dag(
     schedule_interval=None,
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     catchup=False,
-    tags=['test_hzh'],
+    tags=['hzh-test'],
 )
 def tutorial_taskflow_api_etl_001():
 
@@ -32,5 +33,6 @@ def tutorial_taskflow_api_etl_001():
     mystr = transform01()
     transform02(mystr)
     load()
+
 
 tutorial_etl_dag001 = tutorial_taskflow_api_etl_001()
