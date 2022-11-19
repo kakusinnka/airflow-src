@@ -6,3 +6,4 @@
 # tutorial004 在装饰任务和传统任务之间使用 XCom
 # tutorial005 在装饰任务中访问上下文变量
 # tutorial006 学习 BashOperator
+# tutorial007 学习 Airflow 变量
