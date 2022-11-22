@@ -11,4 +11,7 @@
 # tutorial009 学习 任务依赖
 # tutorial010 学习 任务依赖
 # tutorial011 学习 任务依赖
-# tutorial011 学习 BranchPythonOperator
+# tutorial012 学习 BranchPythonOperator
+# tutorial013 学习 LatestOnlyOperator
+# tutorial014 练习 触发规则
+# tutorial015 练习 动态 DAG
