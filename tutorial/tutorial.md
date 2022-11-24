@@ -16,3 +16,7 @@
 # tutorial014 练习 触发规则
 # tutorial015 练习 动态 DAG
 # tutorial016 练习 TaskGroup
+# tutorial017 测试不明确指定依赖关系
+# tutorial018 练习 Edge Labels(边缘标签)
+# tutorial019 练习 DAG 和 TASK 注释文档
+# tutorial020 练习 SLAs
