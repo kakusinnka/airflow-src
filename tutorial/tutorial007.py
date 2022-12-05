@@ -3,7 +3,7 @@ import pendulum
 from airflow.models import Variable
 
 # Normal call style
-foo = Variable.get("foo")
+foo = Variable.get("mykey")
 
 @dag(
     schedule_interval=None,

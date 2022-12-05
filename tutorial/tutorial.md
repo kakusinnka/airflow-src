@@ -23,3 +23,4 @@
 # tutorial021 练习 TaskFlow
 # tutorial022 练习 Params
 # tutorial023 练习 dag_run.conf
+# tutorial024 练习 Lineage
