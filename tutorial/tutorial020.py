@@ -22,11 +22,16 @@ def sla_callback(dag, task_list, blocking_task_list, slas, blocking_tis):
     )
 
 
+default_args = {
+    'owner': 'me',
+    'start_date': pendulum.datetime(2022, 11, 1, tz="Asia/Tokyo"),
+    'sla': datetime.timedelta(seconds=40)
+}
+
 @dag(
-    "hzh-test-dag-020",
     schedule_interval="*/2 * * * *",
-    start_date=pendulum.datetime(2022, 11, 1, tz="Asia/Tokyo"),
     catchup=False,
+    default_args=default_args,
     sla_miss_callback=sla_callback,
     tags=["hzh-test"]
 )
