@@ -6,10 +6,15 @@ from airflow.decorators import dag, task
 from airflow.operators.bash import BashOperator
 from airflow.utils.trigger_rule import TriggerRule
 
-''' 开始时间设置为今天的话，今天结束日程才会运行'''
+'''
+在 schedule_interval 不为 None 的前提下,
+开始时间设置为前一天的话，前一天到今天的会按计划执行,
+开始时间设置为今天的话，今天结束日程才会按计划运行,
+开始时间设置为今天以后的话，下一次运行的是 开始时间到其第二天的时间
+'''
 @dag(
-    schedule_interval=None,
-    start_date=pendulum.datetime(2022, 12, 22, tz="Asia/Tokyo"),
+    schedule_interval="0 8 * * *",
+    start_date=pendulum.datetime(2100, 12, 28, tz="Asia/Tokyo"),
     catchup=False,
     tags=['hzh-test'],
 )

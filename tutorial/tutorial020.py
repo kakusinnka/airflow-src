@@ -22,21 +22,13 @@ def sla_callback(dag, task_list, blocking_task_list, slas, blocking_tis):
     )
 
 
-default_args = {
-    'owner': 'me',
-    'start_date': pendulum.datetime(2022, 11, 1, tz="Asia/Tokyo"),
-    'sla': datetime.timedelta(seconds=40)
-}
-
 @dag(
     schedule_interval="*/2 * * * *",
+    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     catchup=False,
-    default_args=default_args,
     sla_miss_callback=sla_callback,
-    tags=["hzh-test"]
 )
 def example_sla_dag():
-
     @task(sla=datetime.timedelta(seconds=10))
     def sleep_20():
         """Sleep for 20 seconds"""
