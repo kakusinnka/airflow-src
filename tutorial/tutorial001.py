@@ -1,8 +1,13 @@
-
 import pendulum
+import requests
 
 from airflow.decorators import dag, task
+from airflow.providers.http.operators.http import SimpleHttpOperator
+from airflow.providers.http.sensors.http import HttpSensor
 
+# headers = {
+#     'User-Agent': "Mozilla/5.0 (Windows; U; Windows NT 5.2) Gecko/2008070208 Firefox/3.0.1"
+# }
 
 @dag(
     schedule_interval=None,
@@ -12,27 +17,66 @@ from airflow.decorators import dag, task
 )
 def tutorial_taskflow_api_etl_001():
 
-    @task()
-    def extract():
-        print("start")
+    '''
+    def response_check(response):
+        if response.status_code == requests.codes.ok and "helle" in response.text:
+            print(response.status_code)
+            print(response.content)
+            return True
+        else:
+            raise ValueError("error!")
+
+    transform01 = HttpSensor(
+        task_id="http_sensor_check30",
+        http_conn_id="hzh-http",
+        endpoint="test30",
+        request_params={},
+        response_check=response_check,
+        poke_interval=5,
+    )
+
+    transform02 = HttpSensor(
+        task_id="http_sensor_check60",
+        http_conn_id="hzh-http",
+        endpoint="test60",
+        request_params={},
+        response_check=response_check,
+        poke_interval=5,
+    )
+
+    transform03 = HttpSensor(
+        task_id="http_sensor_check90",
+        http_conn_id="hzh-http",
+        endpoint="test90",
+        request_params={},
+        response_check=response_check,
+        poke_interval=5,
+    )
+    '''
 
     @task()
     def transform01():
-        print("transform01")
-        return "transform01"
+        r = requests.get(
+            'https://hzhapi-iyptlynqda-an.a.run.app/test30')
+        print(r.status_code)
+        print(r.content)
 
     @task()
-    def transform02(param: str):
-        print("param" + "002")
+    def transform02():
+        r = requests.get(
+            'https://hzhapi-iyptlynqda-an.a.run.app/test60')
+        print(r.status_code)
+        print(r.content)
 
     @task()
-    def load():
-        print("load")
+    def transform03():
+        r = requests.get(
+            'https://hzhapi-iyptlynqda-an.a.run.app/test90')
+        print(r.status_code)
+        print(r.content)
 
-    extract()
-    mystr = transform01()
-    transform02(mystr)
-    load()
+
+    transform01() >> transform02() >> transform03()
 
 
 tutorial_etl_dag001 = tutorial_taskflow_api_etl_001()
