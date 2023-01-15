@@ -70,7 +70,7 @@ def tutorial_taskflow_api_etl_001():
         session = requests.Session()
         keep_alive = TCPKeepAliveAdapter(idle=120, count=120, interval=60)
         session.mount("https://", keep_alive)
-        r = requests.get(
+        r = session.get(
             'https://hzhapi-iyptlynqda-an.a.run.app/test60')
         print(r.status_code)
         print(r.content)
