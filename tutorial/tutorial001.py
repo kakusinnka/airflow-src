@@ -56,34 +56,43 @@ def tutorial_taskflow_api_etl_001():
     )
     '''
 
-    '''
     @task()
     def transform01():
         r = requests.get(
-            'https://hzhapi-iyptlynqda-an.a.run.app/test30')
+            'https://hzhapi-iyptlynqda-an.a.run.app/test05')
         print(r.status_code)
         print(r.content)
-    '''
 
     @task()
     def transform02():
-        session = requests.Session()
-        keep_alive = TCPKeepAliveAdapter(idle=120, count=120, interval=60)
-        session.mount("https://", keep_alive)
-        r = session.get(
-            'https://hzhapi-iyptlynqda-an.a.run.app/test60')
+        # session = requests.Session()
+        # keep_alive = TCPKeepAliveAdapter(idle=120, count=120, interval=60)
+        # session.mount("https://", keep_alive)
+        #r = session.get(
+        r = requests.get(
+            'https://hzhapi-iyptlynqda-an.a.run.app/test10')
         print(r.status_code)
         print(r.content)
 
     @task()
     def transform03():
         r = requests.get(
-            'https://hzhapi-iyptlynqda-an.a.run.app/test90')
+            'https://hzhapi-iyptlynqda-an.a.run.app/test15')
+        print(r.status_code)
+        print(r.content)
+
+    @task()
+    def transform04():
+        r = requests.get(
+            'https://hzhapi-iyptlynqda-an.a.run.app/test20')
         print(r.status_code)
         print(r.content)
 
 
-    transform02() >> transform03()
+    transform01()
+    transform02()
+    transform03()
+    transform04()
 
 
 tutorial_etl_dag001 = tutorial_taskflow_api_etl_001()
